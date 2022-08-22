@@ -1,0 +1,74 @@
+---
+import { DEV_API } from "../../constants";
+import markdownToHtml, { getDevArticles, removeDevLinks } from "../../utils";
+import type { Article } from "../../types";
+import { ArrowLeftIcon } from "@heroicons/react/outline";
+import DefaultLayout from "../../layouts/default.astro";
+import hljs from "highlight.js/lib/core";
+import typescript from "highlight.js/lib/languages/typescript";
+import "highlight.js/styles/github-dark.css";
+
+hljs.registerLanguage("typescript", typescript);
+
+export async function getStaticPaths() {
+  const data = await getDevArticles();
+  return  data.map((item: Article) => ({ params: { slug: item.slug }, props: {
+      article: item
+    } }))
+}
+
+const { article } = Astro.props;
+
+article.body_markdown = removeDevLinks(article.body_markdown || "");
+article.body_html = await markdownToHtml(article.body_markdown);
+
+---
+<DefaultLayout 
+  title={`${article?.title} | Anshuman Bhardwaj`}
+  description={article?.description || ""}
+  canonicalLink={article?.canonical_url}
+  imageUrl={article?.cover_image}
+  keywords={(article?.tag_list as string) || ""}
+  readingTime={article.reading_time_minutes}
+>
+<main class="mb-4 content-container bg-none">
+    <div>
+      <h1 class="text-3xl lg:text-5xl mb-6 font-bold">
+        {article?.title}
+      </h1>
+      <div class="flex flex-row flex-wrap">
+        {article?.tag_list &&
+          article?.tag_list?.map((item: string) => (
+            <span
+              class="mr-2 mb-2 text-sm text-yellow-400 bg-slate-700 p-1 px-2 rounded"
+            >
+              #{item}
+            </span>
+          ))}
+      </div>
+      {article?.cover_image && (
+        <img
+          src={article.cover_image}
+          alt="cover image"
+          class="w-full my-4 lg:my-10 rounded"
+        />
+      )}
+      <div class="prose markdown" set:html={article.body_html} />
+    </div>
+  <img
+    alt="captain-america waving off"
+    class={"w-full md:w-96"}
+    src="https://media.giphy.com/media/kRkJXYahXjSE0/giphy.gif"
+  />
+
+    <a
+    href={"/articles"}
+      class={
+        "mt-8 px-4 py-2 uppercase rounded border border-slate-400 text-yellow-400 tracking-wider inline-block"
+      }
+    >
+      <ArrowLeftIcon className={"mr-2 h-4 inline"} />
+      Return to All Articles
+    </a>
+</main>
+</DefaultLayout>

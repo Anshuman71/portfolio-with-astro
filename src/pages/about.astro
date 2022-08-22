@@ -1,0 +1,68 @@
+---
+import Section from '../components/Section';
+import SectionHeading from '../components/SectionHeading';
+import DefaultLayout from '../layouts/default.astro';
+const age = new Date().getFullYear() - 2000;
+
+---
+<DefaultLayout title={`About | Anshuman Bhardwaj`}>
+	<main class="content-container">
+        <h1 class={"text-gray-100 text-3xl md:text-5xl mb-4"}>About me</h1>
+        <hr />
+		<br />
+        <Section>
+          <SectionHeading>Personal life</SectionHeading>
+          <p class="text-lg">
+            I&apos;m a {age} year <i>not so old</i> guy, passionate about
+            writing and teaching. I like to listen to slow and calming music
+            most days, unless I&apos;ve just gotten out of the shower because
+            then it&apos;s more likely to be Kanye west on my playlist. I love
+            playing video games like Euro Truck Simulator and Sniper Elite.
+            While I love cycling, I&apos;ve been advised against doing so by
+            from my own family. I&apos;ve found a new love in mountains and I
+            like to travel and walk alone, talking to myself{" "}
+            <i>in a non-creepy way</i>.
+          </p>
+        </Section>
+        <Section>
+          <SectionHeading>Tools of choice</SectionHeading>
+          <p class="text-lg">
+            I love working on a Mac because of their simplicity and build
+            quality. My second machine is a custom build PC docking AMD Ryzen
+            3400G with 16 Gigs of RAM running Ubuntu.
+          </p>
+        </Section>
+        <Section>
+          <SectionHeading>Favorite books</SectionHeading>
+          <p class="text-lg">
+            I started reading books in 2020 and I&apos;ve read more than
+            twenty-five books. I mostly like reading self-help and development
+            books. My top picks are:
+            <ul class="pl-10">
+              <li class="list-disc">The Greatest salesman in the world</li>
+              <li class="list-disc">Tuesdays with Morrie</li>
+              <li class="list-disc">Shoe dog</li>
+              <li class="list-disc">Atomic habits</li>
+              <li class="list-disc">Barking up the wrong tree</li>
+              <li class="list-disc">The Almanac of Naval Ravikant</li>
+            </ul>
+          </p>
+        </Section>
+        <Section>
+          <SectionHeading>Favorite movies</SectionHeading>
+          <p class="text-lg">
+            Well movie watching has been my thing since childhood. I love
+            watching superhero movies and rom-coms mostly. My top picks are:
+            <ul class="pl-10">
+              <li class="list-disc">The Batman vs Superman</li>
+              <li class="list-disc">Inception</li>
+              <li class="list-disc">Superbad</li>
+              <li class="list-disc">Hangover series</li>
+              <li class="list-disc">Tenet</li>
+              <li class="list-disc">Spider-man: No way home</li>
+              <li class="list-disc">Avengers Endgame</li>
+            </ul>
+          </p>
+        </Section>
+      </main>
+</DefaultLayout>

@@ -1,0 +1,26 @@
+---
+import { getDevArticles } from "../../utils";
+import { externalArticles, publishers } from "../../constants";
+import DefaultLayout from "../../layouts/default.astro";
+import type { ArticleInList } from "../../types";
+import Articles from "../../components/Articles";
+
+interface PageProps {
+  articles: ArticleInList[];
+  error: boolean;
+}
+
+const data = await getDevArticles();
+if (!data) {
+  return {
+    notFound: true,
+  };
+}
+const articles = [...externalArticles, ...data];
+---
+
+<DefaultLayout title={`Blog | Anshuman Bhardwaj`}>
+  <main class="content-container">
+    <Articles client:visible articles={articles} />
+  </main>
+</DefaultLayout>
