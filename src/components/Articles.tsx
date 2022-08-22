@@ -3,7 +3,7 @@ import { publishers } from "../constants";
 import type { ArticleInList } from "../types";
 import Article from "./Article";
 import ExternalLink from "./ExternalLink";
-import { SearchIcon } from "@heroicons/react/outline";
+import SearchIcon from "@heroicons/react/outline/SearchIcon";
 
 enum SORT_TYPE {
   published_at = "published_at",
